@@ -1,0 +1,5 @@
+user = mum_postfix_user
+password = mum_postfix_password
+hosts = 127.0.0.1
+dbname = mum_database
+query = SELECT GROUP_CONCAT(DISTINCT alias_recipients.recipient_address SEPARATOR ',') FROM aliases INNER JOIN alias_recipients ON aliases.id = alias_recipients.alias_id INNER JOIN domains ON aliases.domain_id = domains.id WHERE aliases.local_part = '%u' AND domains.domain = '%d' AND domains.active = 1;

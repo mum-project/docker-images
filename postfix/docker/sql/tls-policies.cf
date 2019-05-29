@@ -1,0 +1,5 @@
+user = mum_postfix_user
+password = mum_postfix_password
+hosts = 127.0.0.1
+dbname = mum_database
+query = SELECT policy, params FROM tls_policies WHERE domain = '%s';
