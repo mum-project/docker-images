@@ -115,7 +115,7 @@ postscreen_dnsbl_sites =
 
 smtpd_recipient_restrictions =
         check_recipient_access btree:/srv/config/access_recipient,
-        check_recipient_access mysql:/srv/config/recipient-access.cf
+        check_recipient_access mysql:/srv/sql/recipient-access.cf
         check_client_access cidr:/srv/config/access_client, 
         check_helo_access btree:/srv/config/access_helo,  
         check_sender_access btree:/srv/config/access_sender,
