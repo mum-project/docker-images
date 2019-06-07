@@ -24,7 +24,7 @@ if [ -z $DB_HOST ]; then
 fi
 
 if [ -z $DB_USER ]; then
-    DB_USER="mum_postfix"
+    var_not_set "DB_USER"
 fi
 
 if [ -z $DB_PASSWORD ]; then
@@ -40,19 +40,15 @@ fi
 ## Preparation
 ##
 
-cp /srv/config/{main,master}.cf /etc/postfix/
-find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/mum_postfix_user/${DB_USER}/g" {} \;
-find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/mum_postfix_password/${DB_PASSWORD}/g" {} \;
-find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/mum_postfix_password/${DB_PASSWORD}/g" {} \;
-find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/mum_database/${DB_NAME}/g" {} \;
-find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/127.0.0.1/${DB_HOST}/g" {} \;
+cp /srv/config/dovecot{,-sql}.conf /etc/dovecot/
+find /srv/sql/ -type f -name 'dovecot-sql.conf' -exec sed -i "s/host=127.0.0.1 dbname=mum_database user=mum_dovecot_user password=mum_dovecot_password/host=${HOSTNAME} dbname=${DB_NAME} user=${DB_USER} password=${DB_PASSWORD}/g" {} \;
 
 ########
 ##
-## Postfix Configuration
+## Dovecot Configuration
 ##
 
-postconf -e "myhostname = $HOSTNAME"
+
 
 ########
 ##
