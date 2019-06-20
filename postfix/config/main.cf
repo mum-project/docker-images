@@ -79,7 +79,7 @@ smtpd_sasl_security_options = noanonymous, noplaintext
 smtpd_sasl_tls_security_options = noanonymous
 smtpd_tls_auth_only = yes
 
-virtual_transport = lmtp:unix:private/dovecot-lmtp
+virtual_transport = lmtp:172.17.0.19:24
 
 ########
 ##
