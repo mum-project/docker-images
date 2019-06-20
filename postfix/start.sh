@@ -66,6 +66,14 @@ find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/127.0.0.1/${DB_HOST}/g" {} \
 ##
 
 postconf -e "myhostname = $HOSTNAME"
+postmap /srv/config/access_client
+postmap /srv/config/access_helo
+postmap /srv/config/access_recipient
+postmap /srv/config/access_sender
+postmap /srv/config/local_domains
+postmap /srv/config/local_only_reject.regexp
+postmap /srv/config/mime_header_checks.pcre
+postmap /srv/config/postscreen_access.cidr
 
 ########
 ##

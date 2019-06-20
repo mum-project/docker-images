@@ -18,7 +18,7 @@
 #  -o smtpd_relay_restrictions=permit_sasl_authenticated,reject
 #  -o milter_macro_daemon_name=ORIGINATING
 #628       inet  n       -       -       -       -       qmqpd
-smtp       inet  n       -       y       -       -       smtpd -v
+smtp       inet  n       -       y       -       -       smtpd
     -o smtpd_tls_received_header=yes
     -o content_filter=
 pickup     unix  n       -       y       60      1       pickup
