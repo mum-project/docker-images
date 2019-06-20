@@ -72,6 +72,5 @@ postconf -e "myhostname = $HOSTNAME"
 ## Start
 ##
 
-postfix start &
-touch /var/log/mail.log
-tail -f /var/log/mail.log
+# exec postfix start
+exec supervisord -c /etc/supervisord.conf

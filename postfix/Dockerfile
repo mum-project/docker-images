@@ -2,7 +2,7 @@ FROM alpine
 
 # Install pre-requirements
 RUN apk update
-RUN apk add --no-cache ca-certificates inetutils-syslogd runit
+RUN apk add --no-cache ca-certificates rsyslog supervisor
 RUN update-ca-certificates
 
 
@@ -12,6 +12,8 @@ RUN apk add --no-cache postfix postfix-mysql
 RUN apk add busybox-extras
 
 COPY docker/sql /srv/sql
+COPY docker/supervisord.conf /etc/
+COPY docker/rsyslog.conf /etc/
 COPY start.sh /srv/start.sh
 RUN chmod +x /srv/start.sh
 
