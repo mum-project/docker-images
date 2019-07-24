@@ -39,12 +39,13 @@ RUN addgroup --gid "$GID" "$USER" \
 
 VOLUME /srv/mail
 
-#   24: LMTP
-#  110: POP3 (StartTLS)
-#  143: IMAP4 (StartTLS)
-#  993: IMAP (SSL, deprecated)
-#  995: POP3 (SSL, deprecated)
-# 4190: ManageSieve (StartTLS)
-EXPOSE 24 110 143 993 995 4190
+#    24: LMTP
+#   110: POP3 (StartTLS)
+#   143: IMAP4 (StartTLS)
+#   993: IMAP (SSL, deprecated)
+#   995: POP3 (SSL, deprecated)
+#  4190: ManageSieve (StartTLS)
+# 12345: SASL Auth (for Postfix)
+EXPOSE 24 110 143 993 995 4190 12345
 
 ENTRYPOINT [ "sh" , "/srv/start.sh" ]

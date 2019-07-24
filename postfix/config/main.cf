@@ -26,12 +26,12 @@ inet_protocols = all
 ## TLS Configuration
 ##
 
-#smtpd_tls_cert_file=/srv/config/tls/fullchain.pem
-#smtpd_tls_key_file=/srv/config/tls/privkey.pem
+smtpd_tls_cert_file=/srv/tls/tls.crt
+smtpd_tls_key_file=/srv/tls/tls.key
 smtpd_tls_loglevel = 1
 
-#mtp_tls_cert_file=/srv/config/tls/fullchain.pem
-#smtp_tls_key_file=/srv/config/tls/privkey.pem
+smtp_tls_cert_file=/srv/tls/tls.crt
+smtp_tls_key_file=/srv/tls/tls.key
 smtp_tls_loglevel = 1
 
 smtpd_tls_security_level = may
@@ -72,7 +72,7 @@ smtp_tls_policy_maps = mysql:/srv/sql/tls-policies.cf
 ##
 
 smtpd_sasl_type = dovecot
-smtpd_sasl_path = private/auth
+smtpd_sasl_path = inet:127.0.0.1:12345
 smtpd_sasl_auth_enable = yes
 broken_sasl_auth_clients = yes
 smtpd_sasl_security_options = noanonymous, noplaintext

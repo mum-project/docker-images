@@ -63,6 +63,8 @@ find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/mum_postfix_password/${DB_PA
 find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/mum_postfix_password/${DB_PASSWORD}/g" {} \;
 find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/mum_database/${DB_NAME}/g" {} \;
 find /srv/sql/ -type f -name '*.cf' -exec sed -i "s/127.0.0.1/${DB_HOST}/g" {} \;
+sed -i "s/inet:127.0.0.1:12345/inet:${DOVECOT_HOST}:12345/g" /etc/postfix/main.cf
+sed -i "s/inet:127.0.0.1:12345/inet:${DOVECOT_HOST}:12345/g" /etc/postfix/master.cf
 sed -i "s/lmtp:127.0.0.1:24/lmtp:${DOVECOT_HOST}:24/g" /etc/postfix/main.cf
 
 ########
