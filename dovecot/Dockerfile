@@ -18,6 +18,7 @@ RUN apk add --no-cache \
 # For development
 RUN apk add busybox-extras
 
+COPY config/dovecot.conf /etc/dovecot/
 COPY docker/dovecot-sql.conf /etc/dovecot/dovecot-sql.conf
 COPY start.sh /srv/start.sh
 RUN chmod +x /srv/start.sh
@@ -36,7 +37,7 @@ RUN addgroup --gid "$GID" "$USER" \
     --uid "$UID" \
     "$USER"
 
-VOLUME /srv/config /srv/mail
+VOLUME /srv/mail
 
 #   24: LMTP
 #  110: POP3 (StartTLS)

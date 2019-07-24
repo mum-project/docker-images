@@ -156,4 +156,4 @@ dovecot   unix  -       n       n       -       -       pipe flags=DRhu
 #    -o cleanup_service_name=subcleanup
 
 subcleanup unix  n       -       y       -       0       cleanup
-    -o header_checks=pcre:/srv/config/submission_header_checks.pcre
+#    -o header_checks=pcre:/srv/config/submission_header_checks.pcre

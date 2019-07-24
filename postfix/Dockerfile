@@ -11,6 +11,10 @@ RUN apk add --no-cache postfix postfix-mysql
 # For development
 RUN apk add busybox-extras
 
+RUN mkdir /var/spool/postfix/etc && echo "smtp		25/tcp		mail		# Simple Mail Transfer" > /var/spool/postfix/etc/services
+
+COPY config/main.cf /etc/postfix/
+COPY config/master.cf /etc/postfix/
 COPY docker/sql /srv/sql
 COPY docker/supervisord.conf /etc/
 COPY docker/rsyslog.conf /etc/

@@ -2,10 +2,10 @@
 
 SHOULD_EXIT_EARLY=false
 
-if [ ! -d "/srv/config" ]; then
-    echo "/srv/config is not mounted"
-    SHOULD_EXIT_EARLY=true
-fi
+# if [ ! -d "/srv/config" ]; then
+#     echo "/srv/config is not mounted"
+#     SHOULD_EXIT_EARLY=true
+# fi
 
 function var_not_set {
     echo "Environment variable $1 is not set"
@@ -51,23 +51,14 @@ fi
 ## Preparation
 ##
 
-cp /srv/config/dovecot.conf /etc/dovecot/
 find /etc/dovecot/ -type f \
     -name 'dovecot-sql.conf' \
-    -exec sed -i "s/host=127.0.0.1 dbname=mum_database user=mum_dovecot_user password=mum_dovecot_password/host=${HOSTNAME} dbname=${DB_NAME} user=${DB_USER} password=${DB_PASSWORD}/g" {} \;
-
-########
-##
-## Dovecot Configuration
-##
-
-
+    -exec sed -i "s/host=127.0.0.1 dbname=mum_database user=mum_dovecot_user password=mum_dovecot_password/host=${DB_HOST} dbname=${DB_NAME} user=${DB_USER} password=${DB_PASSWORD}/g" {} \;
 
 ########
 ##
 ## Start
 ##
 
-exec dovecot -F &
-touch /var/log/mail.log
-tail -f /var/log/mail.log
+echo "Starting Dovecot..."
+dovecot -F

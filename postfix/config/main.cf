@@ -26,12 +26,12 @@ inet_protocols = all
 ## TLS Configuration
 ##
 
-smtpd_tls_cert_file=/srv/config/tls/fullchain.pem
-smtpd_tls_key_file=/srv/config/tls/privkey.pem
+#smtpd_tls_cert_file=/srv/config/tls/fullchain.pem
+#smtpd_tls_key_file=/srv/config/tls/privkey.pem
 smtpd_tls_loglevel = 1
 
-smtp_tls_cert_file=/srv/config/tls/fullchain.pem
-smtp_tls_key_file=/srv/config/tls/privkey.pem
+#mtp_tls_cert_file=/srv/config/tls/fullchain.pem
+#smtp_tls_key_file=/srv/config/tls/privkey.pem
 smtp_tls_loglevel = 1
 
 smtpd_tls_security_level = may
@@ -59,7 +59,7 @@ smtp_tls_exclude_ciphers = MD5, DES, ADH, RC4, PSD, SRP, 3DES, eNULL, aNULL, SEE
 
 smtpd_tls_eecdh_grade=ultra
 smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
-smtpd_tls_dh1024_param_file = /srv/config/tls/dh4096.pem
+#smtpd_tls_dh1024_param_file = /srv/config/tls/dh4096.pem
 
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
@@ -79,14 +79,15 @@ smtpd_sasl_security_options = noanonymous, noplaintext
 smtpd_sasl_tls_security_options = noanonymous
 smtpd_tls_auth_only = yes
 
-virtual_transport = lmtp:172.17.0.19:24
+virtual_transport = lmtp:127.0.0.1:24
 
 ########
 ##
 ## Postscreen Configuration
 ##
 
-postscreen_access_list = permit_mynetworks, cidr:/srv/config/postscreen_access.cidr
+#postscreen_access_list = permit_mynetworks, cidr:/srv/config/postscreen_access.cidr
+postscreen_access_list = permit_mynetworks
 postscreen_blacklist_action = drop
 postscreen_greet_action = enforce
 postscreen_dnsbl_action = enforce
@@ -114,11 +115,11 @@ postscreen_dnsbl_sites =
 ##
 
 smtpd_recipient_restrictions =
-        check_recipient_access btree:/srv/config/access_recipient,
+#        check_recipient_access btree:/srv/config/access_recipient,
         check_recipient_access mysql:/srv/sql/recipient-access.cf
-        check_client_access cidr:/srv/config/access_client, 
-        check_helo_access btree:/srv/config/access_helo,  
-        check_sender_access btree:/srv/config/access_sender,
+#        check_client_access cidr:/srv/config/access_client, 
+#        check_helo_access btree:/srv/config/access_helo,  
+#        check_sender_access btree:/srv/config/access_sender,
         reject_non_fqdn_sender,   
         reject_non_fqdn_recipient,   
         reject_unknown_sender_domain,   
@@ -137,10 +138,10 @@ smtpd_sender_restrictions =
 	reject_authenticated_sender_login_mismatch,
 	permit_sasl_authenticated
 
-smtpd_restriction_classes = local_only
-local_only =
-        check_recipient_access btree:/srv/config/local_domains,
-        check_sender_access regexp:/srv/config/local_only_reject.regexp
+#smtpd_restriction_classes = local_only
+#local_only =
+#        check_recipient_access btree:/srv/config/local_domains,
+#        check_sender_access regexp:/srv/config/local_only_reject.regexp
 
 ########
 ##
@@ -162,7 +163,7 @@ local_recipient_maps = $virtual_mailbox_maps
 
 default_database_type = btree
 
-mime_header_checks = pcre:/srv/config/mime_header_checks.pcre
+#mime_header_checks = pcre:/srv/config/mime_header_checks.pcre
 
 maximal_queue_lifetime = 3d
 bounce_queue_lifetime = 3d
